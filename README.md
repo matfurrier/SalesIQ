@@ -110,6 +110,23 @@ As previsões são **pré‑calculadas** e disponibilizadas como cenários indep
 
 ---
 
+## Módulo Financeiro (Visão Executiva)
+
+O QlikDashboard inclui um módulo financeiro integrado, focado em visibilidade,
+projeção e governança do caixa.
+
+Funcionalidades principais:
+- Contas a Receber e a Pagar (visão aberta, vencida, a vencer)
+- KPIs financeiros: DSO, DPO, exposição e liquidez
+- Fluxo de Caixa diário e projetado (curto, médio e longo prazo)
+- Planejamento financeiro com investimentos e empréstimos
+- Integração direta com views e funções SQL no PostgreSQL
+
+O módulo foi desenhado para:
+- Suportar decisões táticas (curto prazo)
+- Apoiar planejamento financeiro e gestão de risco
+- Garantir rastreabilidade e consistência dos números
+
 ---
 
 ## 🇺🇸 Overview
@@ -215,3 +232,22 @@ Forecasts are **pre‑computed** and exposed as independent scenarios.
 
 **Status:** Final validation / controlled rollout  
 **License:** Proprietary – All rights reserved
+
+---
+
+## Financial Module (Executive View)
+
+QlikDashboard includes an integrated financial module focused on
+cash visibility, projections, and financial governance.
+
+Key capabilities:
+- Accounts Receivable and Payable (open, overdue, upcoming)
+- Financial KPIs: DSO, DPO, exposure, liquidity
+- Daily and projected cash flow (short, mid, long term)
+- Financial planning with investments and loans
+- Direct integration with PostgreSQL views and functions
+
+The module is designed to:
+- Support short-term tactical decisions
+- Enable financial planning and risk management
+- Ensure data consistency and traceability

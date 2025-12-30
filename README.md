@@ -2,6 +2,8 @@ Commercial & Forecast Analytics
 
 [🇧🇷 Português](#-visão-geral) | [🇺🇸 English](#-overview)
 
+📐 Diagramas: [Arquitetura e Fluxos](docs/diagrams/ARCHITECTURE_QlikDashboard_V2.md)
+
 ---
 
 ## 🇧🇷 Visão Geral

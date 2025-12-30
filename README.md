@@ -1,238 +1,217 @@
 Commercial & Forecast Analytics
 
-🔗 **Languages**  
-- [Português 🇧🇷](#português)  
-- [English 🇺🇸](#english)
+[🇧🇷 Português](#-visão-geral) | [🇺🇸 English](#-overview)
 
 ---
 
-## Português
+## 🇧🇷 Visão Geral
 
-### Visão Geral
+**QlikDashboard** é uma plataforma web de analytics e suporte à decisão, inspirada no estilo do Qlik Sense, focada em **visualização de dados comerciais, financeiros e previsões inteligentes**.
 
-O **SalesIQ** é um **dashboard web corporativo** desenvolvido em **React / Next.js**, inspirado no estilo do **Qlik Sense**, para visualização avançada de dados comerciais, financeiros e operacionais — agora com **previsão inteligente de vendas**.
-
-O projeto foi criado para **centralizar indicadores críticos do negócio**, reduzir dependência de planilhas, acelerar decisões e oferecer **análises explicáveis**, inclusive para previsões.
-
-📌 **Status:** validação final / rollout  
-📌 **Tipo:** sistema corporativo interno  
-📌 **Código-fonte:** privado (repositório público apenas para documentação)
+> **Nota de Arquitetura (importante)**  
+> Este repositório **não contém pipelines de Machine Learning**.  
+> As previsões consumidas pelo dashboard são **geradas por pipelines externos**, mantidos em ambiente privado.  
+> O foco deste projeto é **produto, arquitetura, governança, visualização e explainability**.
 
 ---
 
-### Problema
+## 🇧🇷 Problema
 
-Antes do SalesIQ:
+Empresas com forte operação comercial e financeira enfrentam desafios como:
 
-- Dados comerciais dispersos em múltiplas fontes  
-- Dependência excessiva de planilhas manuais  
-- Dificuldade de cruzar vendas, orçamento e desempenho  
-- Baixa visibilidade financeira (fluxo, CR/CP, projeções)  
-- Previsões pouco confiáveis ou não explicáveis  
-- Alto custo de licenças e customizações em ferramentas BI tradicionais  
+- Dados fragmentados entre vendas, orçamento, faturamento e caixa  
+- Dificuldade em analisar desempenho no **Ano Francês (Set → Ago)**  
+- Previsões pouco transparentes (“caixa‑preta”)  
+- Falta de visão integrada entre **resultado realizado** e **cenários futuros**
 
 ---
 
-### Solução
+## 🇧🇷 Solução
 
-O SalesIQ entrega:
+Uma aplicação web única que:
 
-- Dashboards web interativos no estilo Qlik Sense  
-- KPIs comerciais, financeiros e operacionais centralizados  
-- Comparativos de **Vendas vs Budget**  
-- Análises por cliente, produto, região e responsável  
-- Fluxo de caixa, contas a receber/pagar e projeções  
-- **Previsão inteligente de vendas com explainability**  
-- Arquitetura modular e evolutiva  
-
----
-
-### Fluxos Principais
-
-- **Comercial:** vendas, produtos, clientes, performance  
-- **Previsões:** projeções inteligentes por Ano Francês  
-- **Financeiro:** faturamento, fluxo de caixa, CR/CP  
-- **Logística / Produção:** em evolução  
+- Consolida dados comerciais e financeiros em tempo quase real  
+- Apresenta previsões como **cenários comparáveis**, não como verdades absolutas  
+- Explica **como** e **por que** uma previsão foi gerada  
+- Mantém **separação clara** entre:
+  - pipelines de ML
+  - dados
+  - camada de decisão (dashboard)
 
 ---
 
-### Arquitetura (alto nível)
+## 🇧🇷 Fluxo de Arquitetura (Resumo)
 
-```
-[ Next.js / React ]
-        |
-        v
-[ API Routes (Next.js) ]
-        |
-[ PostgreSQL ]
-```
+```mermaid
+flowchart LR
+  U[Usuários de Negócio] --> WEB[QlikDashboard<br/>Next.js + React]
 
----
+  subgraph APP[Aplicação Web]
+    UI[Dashboards & KPIs]
+    API[API Routes<br/>Next.js]
+  end
 
-### Stack Tecnológico
+  WEB --> UI
+  WEB --> API
 
-**Frontend**
-- Next.js
-- React 18
-- TypeScript
-- Tailwind CSS
-- ShadCN / Radix UI
+  API --> DB[(PostgreSQL)]
+  DB --> VIEWS[Views & Funções SQL]
 
-**Visualização**
-- ApexCharts
-- Recharts
-- D3.js
-- Leaflet (mapas)
+  subgraph ML[Ambiente Externo de ML]
+    PIPE[Pipelines de Previsão]
+    JSON[Forecast Outputs]
+  end
 
-**Dados**
-- PostgreSQL
-- Views SQL e funções agregadas
-
----
-
-### Previsão Inteligente (Diferencial)
-
-A página de **Previsões** oferece:
-
-- Base conceitual em **Ano Francês (Set → Ago)**  
-- KPIs executivos de crescimento e projeção  
-- Série histórica + previsão futura  
-- Intervalos de confiança (cone de incerteza)  
-- Comparativos entre semestres  
-
-#### Como a previsão funciona (Explainability)
-
-1. **Competição de Modelos**  
-   Múltiplos modelos (ex: Prophet, ARIMA, LightGBM, TFT) competem entre si.  
-   O modelo com menor erro (sMAPE) é selecionado.
-
-2. **Modo Híbrido**  
-   - Modelo vencedor gera a previsão central  
-   - Prophet calcula intervalos de confiança e sazonalidade  
-
-3. **Fatores Explicáveis**  
-   - Fatores sazonais mensais  
-   - Fator de crescimento orgânico  
-   - Metadados exibidos no dashboard  
-
-> ⚠️ Os pipelines de ML não fazem parte deste repositório público.
-
----
-
-### Segurança e Governança
-
-- APIs isoladas por domínio funcional  
-- Validações server-side  
-- Controle de acesso via token no frontend  
-- Dados sensíveis protegidos no banco  
-- Views SQL como camada de governança de dados  
-
----
-
-### Papel de Liderança Técnica
-
-Neste projeto, fui responsável por:
-
-- Arquitetura frontend + backend  
-- Definição dos fluxos de dados e KPIs  
-- Governança de dados via PostgreSQL (views/funções)  
-- Estruturação da camada de previsões  
-- Integração entre áreas comercial e financeira  
-- Estratégia de evolução incremental  
-- Entrega técnica end-to-end  
-
----
-
-### Observações
-
-- Código mantido privado por se tratar de sistema corporativo  
-- Este repositório público existe apenas para **documentação técnica e apresentação profissional**  
-
----
-
-## English
-
-### Overview
-
-**SalesIQ** is an **internal web-based analytics dashboard** built with **React / Next.js**, inspired by **Qlik Sense**, designed to centralize commercial, financial, and operational data — now enhanced with **intelligent sales forecasting**.
-
-📌 **Status:** final validation / rollout  
-📌 **Type:** internal corporate system  
-📌 **Source code:** private (public repository for documentation only)
-
----
-
-### Problem
-
-Before this solution:
-
-- Business data scattered across multiple sources  
-- Heavy reliance on spreadsheets  
-- Limited cross-analysis between sales and budget  
-- Poor financial visibility  
-- Forecasts without explainability  
-- High cost of traditional BI tools  
-
----
-
-### Solution
-
-SalesIQ provides:
-
-- Interactive BI-style dashboards  
-- Centralized KPIs  
-- Sales vs Budget analysis  
-- Customer and product performance  
-- Cash flow and financial projections  
-- **Explainable intelligent forecasting**  
-- Modular and scalable architecture  
-
----
-
-### High-Level Architecture
-
-```
-[ Next.js / React ]
-        |
-        v
-[ Next.js API Routes ]
-        |
-[ PostgreSQL ]
+  PIPE --> JSON
+  UI --> JSON
 ```
 
 ---
 
-### Technology Stack
+## 🇧🇷 Previsão Inteligente — Estado Atual
 
-- Next.js / React / TypeScript  
-- Tailwind CSS / ShadCN  
-- ApexCharts / Recharts / D3  
-- PostgreSQL  
+### Cenários de Previsão Disponíveis
 
----
+- **Principal** — histórico + sazonalidade estatística  
+- **Clima** — temperatura e precipitação (Open‑Meteo)  
+- **Câmbio** — USD/BRL (Bacen / SGS)  
+- **IPCA / SELIC** — indicadores macroeconômicos  
 
-### Intelligent Forecasting
+As previsões são **pré‑calculadas** e disponibilizadas como cenários independentes.
 
-- French Year based analysis (Sep → Aug)  
-- Hybrid forecasting models  
-- Confidence intervals  
-- Seasonal and growth factor explainability  
+### Agregação de Cenários
 
----
+- Agregação por **média simples**
+- Objetivo: reduzir dependência de um único modelo
+- Evolução prevista: pesos por desempenho histórico (sMAPE)
 
-### Technical Leadership
+### KPIs (Ano Francês)
 
-Responsibilities included:
-
-- End-to-end architecture  
-- Data governance strategy  
-- Forecast explainability design  
-- Business KPI modeling  
-- Full technical delivery  
+- Crescimento Projetado (AF)  
+- Previsão do Semestre Atual (AF)  
+- Previsão do Próximo Semestre (AF)  
 
 ---
 
-### Notes
+## 🇧🇷 O que foi liderado neste projeto
 
-- Source code is private due to corporate ownership  
-- This repository exists for **technical documentation and professional showcase only**  
+- Arquitetura da aplicação e separação de responsabilidades  
+- Governança de dados e previsões  
+- Definição do modelo de explainability  
+- Integração comercial, financeira e previsões  
+- Entrega incremental (beta → validação → rollout)
+
+---
+
+## 🇧🇷 Status do Projeto
+
+**Status:** Validação final / rollout controlado  
+**Licença:** Proprietário – Todos os direitos reservados
+
+---
+
+---
+
+## 🇺🇸 Overview
+
+**QlikDashboard** is a web‑based analytics and decision‑support platform inspired by Qlik Sense, focused on **commercial, financial and intelligent forecasting dashboards**.
+
+> **Architecture Note (important)**  
+> This repository **does not include Machine Learning pipelines**.  
+> Forecasts are **produced by external ML pipelines**, maintained in a private environment.  
+> This project focuses on **product design, architecture, governance, visualization and explainability**.
+
+---
+
+## 🇺🇸 Problem
+
+Companies with complex commercial and financial operations often face:
+
+- Fragmented data across sales, budget, billing and cash flow  
+- Difficulty analyzing performance using the **French Year (Sep → Aug)**  
+- Black‑box forecasts with low trust  
+- No integrated view between **actuals** and **future scenarios**
+
+---
+
+## 🇺🇸 Solution
+
+A single web platform that:
+
+- Consolidates commercial and financial data  
+- Presents forecasts as **comparable scenarios**, not absolute truths  
+- Clearly explains **how** and **why** forecasts are produced  
+- Enforces a clean separation between:
+  - ML pipelines
+  - data sources
+  - decision and visualization layer
+
+---
+
+## 🇺🇸 Architecture Flow (High Level)
+
+```mermaid
+flowchart LR
+  U[Business Users] --> WEB[QlikDashboard<br/>Next.js + React]
+
+  subgraph APP[Web Application]
+    UI[Dashboards & KPIs]
+    API[Next.js API Routes]
+  end
+
+  WEB --> UI
+  WEB --> API
+
+  API --> DB[(PostgreSQL)]
+  DB --> VIEWS[SQL Views & Functions]
+
+  subgraph ML[External ML Environment]
+    PIPE[Forecast Pipelines]
+    JSON[Forecast Outputs]
+  end
+
+  PIPE --> JSON
+  UI --> JSON
+```
+
+---
+
+## 🇺🇸 Intelligent Forecasting — Current State
+
+### Available Forecast Scenarios
+
+- **Core** — historical data + statistical seasonality  
+- **Weather** — temperature and precipitation (Open‑Meteo)  
+- **FX** — USD/BRL (Brazil Central Bank / SGS)  
+- **Inflation & Interest** — IPCA / SELIC  
+
+Forecasts are **pre‑computed** and exposed as independent scenarios.
+
+### Scenario Aggregation
+
+- Simple average aggregation
+- Goal: reduce reliance on a single model
+- Planned evolution: performance‑weighted aggregation (sMAPE)
+
+### KPIs (French Year)
+
+- Projected Growth (FY)  
+- Current Semester Forecast (FY)  
+- Next Semester Forecast (FY)  
+
+---
+
+## 🇺🇸 Leadership & Ownership
+
+- Application architecture and system design  
+- Data governance and forecast consumption model  
+- Explainability strategy  
+- Commercial and financial integration  
+- End‑to‑end delivery (beta → validation → rollout)
+
+---
+
+## 🇺🇸 Project Status
+
+**Status:** Final validation / controlled rollout  
+**License:** Proprietary – All rights reserved

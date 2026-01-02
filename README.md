@@ -5,10 +5,15 @@ Commercial & Forecast Analytics
 📐 Diagramas: [Arquitetura e Fluxos](docs/diagrams/ARCHITECTURE_QlikDashboard_V2.md)
 
 ---
+<img width="1263" height="666" alt="SalesIQ" src="https://github.com/user-attachments/assets/08f432ab-f3a1-4b83-8032-2c08348f1329" />
+<img width="1263" height="666" alt="SalesIQ" src="https://github.com/user-attachments/assets/0619396f-9ea8-4118-9c7d-a1050b6f1895" />
+<img width="1273" height="710" alt="SalesIQ" src="https://github.com/user-attachments/assets/fc8635f2-b639-46ae-a51f-ee439bac5874" />
+<img width="1282" height="700" alt="SalesIQ" src="https://github.com/user-attachments/assets/7fd5b07b-8475-4d74-a488-2fe9e44a1815" />
+<img width="1316" height="669" alt="SalesIQ" src="https://github.com/user-attachments/assets/be4c7537-8770-44ad-a986-ce2b044d356e" />
 
 ## 🇧🇷 Visão Geral
 
-**QlikDashboard** é uma plataforma web de analytics e suporte à decisão, inspirada no estilo do Qlik Sense, focada em **visualização de dados comerciais, financeiros e previsões inteligentes**.
+**SalesIQ** é uma plataforma web de analytics e suporte à decisão, inspirada no estilo do Qlik Sense, focada em **visualização de dados comerciais, financeiros e previsões inteligentes**.
 
 > **Nota de Arquitetura (importante)**  
 > Este repositório **não contém pipelines de Machine Learning**.  
@@ -114,7 +119,7 @@ As previsões são **pré‑calculadas** e disponibilizadas como cenários indep
 
 ## Módulo Financeiro (Visão Executiva)
 
-O QlikDashboard inclui um módulo financeiro integrado, focado em visibilidade,
+O SalesIQ inclui um módulo financeiro integrado, focado em visibilidade,
 projeção e governança do caixa.
 
 Funcionalidades principais:
@@ -133,7 +138,7 @@ O módulo foi desenhado para:
 
 ## 🇺🇸 Overview
 
-**QlikDashboard** is a web‑based analytics and decision‑support platform inspired by Qlik Sense, focused on **commercial, financial and intelligent forecasting dashboards**.
+**SalesIQ** is a web‑based analytics and decision‑support platform inspired by Qlik Sense, focused on **commercial, financial and intelligent forecasting dashboards**.
 
 > **Architecture Note (important)**  
 > This repository **does not include Machine Learning pipelines**.  
@@ -239,7 +244,7 @@ Forecasts are **pre‑computed** and exposed as independent scenarios.
 
 ## Financial Module (Executive View)
 
-QlikDashboard includes an integrated financial module focused on
+SalesIQ includes an integrated financial module focused on
 cash visibility, projections, and financial governance.
 
 Key capabilities:
